@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "icSI1m5EWsEZVC5M5mIFC2ikgHdnN5EnaDHmciHQpshrZ43kkJBn0yNxc23dzothe5sG28uE4stlthFog2br6Q==",
+  "success": true,
+  "projectFilePath": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trail\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
+    "C:\\Users\\trail\\.nuget\\packages\\onebitsoftware.utilities.operationresult\\1.4.6\\onebitsoftware.utilities.operationresult.1.4.6.nupkg.sha512"
+  ],
+  "logs": []
+}
