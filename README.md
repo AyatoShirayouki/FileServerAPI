@@ -103,7 +103,122 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 ### Key Test Cases
 
-* __StoreAsync_SuccessfullyStoresFile_ReturnsSuccess__: Verifies that files are stored successfully.
-* __GetAsync_FileExists_ReturnsStreamInfo__: Checks that files can be retrieved correctly.
-* __UpdateAsync_FileDoesNotExist_ReturnsError__: Ensures error handling for attempts to update non-existent files.
-* __DeleteAsync_FileExists_DeletesFileSuccessfully__: Confirms that files can be deleted.
+* #### StoreAsync_SuccessfullyStoresFile_ReturnsSuccess
+  - __Objective__: This test ensures the StoreAsync method can successfully store a file when given valid input.
+  - __Methodology__: It mocks a StreamInfo object representing the file to be stored and invokes StoreAsync with a new GUID. The test verifies if the operation is marked as successful.
+  - __Verification__: Asserts that the Success property of the returned OperationResult is true, indicating the operation succeeded without issues.
+    
+* #### StoreAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Tests whether StoreAsync properly responds to cancellation requests by throwing an OperationCanceledException.
+  - __Methodology__: A CancellationToken is canceled before invoking StoreAsync. The method is expected to respect this token and abort the operation.
+  - __Verification__: Checks if an OperationCanceledException is thrown, confirming the operation's responsiveness to cancellation.
+    
+* #### UpdateAsync_FileDoesNotExist_ReturnsError
+  - __Objective__: Verifies that UpdateAsync correctly handles attempts to update a non-existent file by returning an error.
+  - __Methodology__: Attempts to update a file using a GUID that does not correspond to any existing file. It checks the method's response for error messages.
+  - __Verification__: Asserts that the Success flag is false and the Errors collection contains relevant error messages.
+
+* #### GetAsync_FileExists_ReturnsStreamInfo
+  - __Objective__: Ensures that GetAsync can retrieve an existing file and return its StreamInfo.
+  - __Methodology__: A file is created temporarily, and GetAsync is used to fetch it. The presence and correctness of the returned StreamInfo are then verified.
+  - __Verification__: Confirms that Success is true, ResultObject is not null, and the stream within ResultObject matches the content of the file created for the test.
+
+* #### GetBytesAsync_LargeFile_ReturnsBytesWithCorrectLength
+  - __Objective__: Tests the ability of GetBytesAsync to handle large files correctly by returning a byte array of the correct length.
+  - __Methodology__: Creates a large file and uses GetBytesAsync to retrieve it. The size of the returned byte array is compared to the expected file size.
+  - __Verification__: Asserts that the length of the returned byte array matches the size of the file created, ensuring the file's content is correctly read and returned.
+
+* #### GetAsync_FileNotFound_ReturnsError
+  - __Objective__: Confirms that GetAsync responds with an appropriate error when requested to retrieve a file that does not exist.
+  - __Methodology__: Invokes GetAsync with a GUID for a non-existent file and examines the response for error indications.
+  - __Verification__: Checks that Success is false and that the errors indicate the file could not be found.
+
+* #### GetBytesAsync_ExtremelyLargeFile_ReturnsErrorOrHandlesGracefully
+  - __Objective__: Assesses how GetBytesAsync deals with extremely large files, either by handling gracefully or returning an error.
+  - __Methodology__: An exceedingly large file is created and GetBytesAsync is tasked with retrieving it. The method's ability to handle or report errors regarding the file size is observed.
+  - __Verification__: Verifies either a successful operation (with correct file size) or the presence of expected error messages related to file size limitations.
+
+* #### UpdateAsync_SimultaneousAccess_ReturnsTrue
+  - __Objective__: Tests UpdateAsync's behavior under conditions of simultaneous access, ensuring it can successfully update a file.
+  - __Methodology__: After creating a file, UpdateAsync is called to modify its contents. The operation's success is then evaluated.
+  - __Verification__: Asserts the operation's success, indicating that UpdateAsync can handle simultaneous access scenarios effectively.
+
+* #### GetBytesAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Verifies that GetBytesAsync honors cancellation requests by aborting the operation and throwing OperationCanceledException.
+  - __Methodology__: A cancellation token is set to the canceled state before calling GetBytesAsync. The operation's response to this cancellation is then tested.
+  - __Verification__: Ensures that an OperationCanceledException is thrown, demonstrating proper cancellation behavior.
+
+* #### ExistsAsync_FileExists_ReturnsTrue
+  - __Objective__: Checks if ExistsAsync accurately determines the existence of a file.
+  - __Methodology__: After creating a file, ExistsAsync is used to check for its presence based on its GUID.
+  - __Verification__: Asserts that the result indicates the file exists, validating the method's ability to detect existing files.
+
+* #### UpdateAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Ensures that the UpdateAsync method properly responds to a cancellation request by aborting the update operation.
+  - __Methodology__: Prepares a CancellationToken that is already cancelled and then invokes UpdateAsync with this token. The method should recognize the cancellation and halt the operation.
+  - __Verification__: Confirms the method throws an OperationCanceledException, demonstrating it correctly responds to cancellation requests.
+
+* #### UpdateAsync_SuccessfullyUpdatesFile_ReturnsSuccess
+  - __Objective__: Verifies that UpdateAsync can successfully update the contents of an existing file.
+  - __Methodology__: A file is initially created with predefined content. UpdateAsync is then used with new content for this file. Afterward, it verifies if the file content has been updated as expected.
+  - __Verification__: Asserts the success of the operation and optionally checks if the file content matches the new content provided to UpdateAsync.
+
+* #### ExistsAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Tests whether the ExistsAsync method correctly handles a cancellation signal by throwing an OperationCanceledException.
+  - __Methodology__: Invokes ExistsAsync with a CancellationToken that has been cancelled, expecting the method to abort and indicate the operation was cancelled.
+  - __Verification__: Checks for an OperationCanceledException to be thrown, signifying the method's appropriate reaction to the cancellation request.
+
+* #### StoreAsync_InvalidInput_ReturnsError
+  - __Objective__: Checks how the StoreAsync method deals with invalid input, specifically null or empty streams.
+  - __Methodology__: Calls StoreAsync with a StreamInfo object that has a null Stream property, simulating an invalid input scenario.
+  - __Verification__: Asserts that the method returns a failure (Success is false) and contains error messages indicating the invalid input.
+
+* #### GetAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Ensures GetAsync respects cancellation requests by aborting the retrieval operation.
+  - __Methodology__: A cancelled CancellationToken is passed to GetAsync. The operation is expected to recognize this cancellation and not proceed.
+  - __Verification__: Confirms that an OperationCanceledException is thrown, indicating the operation was cancelled as requested.
+
+* #### ExistsAsync_FileDoesNotExist_ReturnsFalse
+  - __Objective__: Ensures ExistsAsync accurately reports the non-existence of a file.
+  - __Methodology__: ExistsAsync is invoked with a GUID that does not match any existing file in the system. The method should then return a result indicating the file does not exist.
+  - __Verification__: Verifies that the operation result indicates the file does not exist (ResultObject is false) and the operation itself is considered unsuccessful (Success is false).
+
+* #### DeleteAsync_FileExists_DeletesFileSuccessfully
+  - __Objective__: Tests the DeleteAsync method's ability to successfully delete an existing file.
+  - __Methodology__: A file is first created, then DeleteAsync is called to delete it. The absence of the file is checked afterward.
+  - __Verification__: Ensures the operation is successful and the file no longer exists, demonstrating effective file deletion capabilities.
+
+* #### DeleteAsync_FileDoesNotExist_ReturnsError
+  - __Objective__: Checks DeleteAsync's error handling when attempting to delete a file that doesn't exist.
+  - __Methodology__: Attempts to delete a file using a GUID for a non-existent file and examines the response for appropriate error handling.
+  - __Verification__: Asserts the operation was not successful (Success is false) and verifies the presence of error messages indicating the file could not be found.
+
+* #### DeleteAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Ensures DeleteAsync responds correctly to cancellation requests by aborting the delete operation.
+  - __Methodology__: A CancellationToken is cancelled prior to invoking DeleteAsync. The method should halt and indicate the operation was cancelled.
+  - __Verification__: Checks for an OperationCanceledException, validating the method's adherence to cancellation requests.
+
+* #### GetHashAsync_FileExists_ComputesHashSuccessfully
+  - __Objective__: Verifies that GetHashAsync can successfully compute and return the hash of an existing file.
+  - __Methodology__: After creating a file with known content, GetHashAsync is used to compute its hash. The hash result is then compared to an expected value or simply checked for existence.
+  - __Verification__: Asserts the operation's success and that the result object contains a valid hash string, confirming the method's functionality.
+
+* #### GetHashAsync_FileDoesNotExist_ReturnsError
+  - __Objective__: Tests GetHashAsync's response when attempting to compute the hash of a non-existent file.
+  - __Methodology__: Invokes GetHashAsync with a GUID for a file that does not exist, expecting the
+  - __Verification__: Ensures the operation returns a failure (Success is false) and the errors convey that the file could not be found, verifying appropriate error handling for absent files.
+
+* #### GetHashAsync_WithCancellation_ThrowsOperationCanceledException
+  - __Objective__: Confirms that GetHashAsync correctly aborts its process when a cancellation request is received, signifying responsive and controlled termination of the operation.
+  - __Methodology__: A cancellation token that is already cancelled is passed to the method. GetHashAsync is expected to immediately recognize the cancellation and terminate its execution.
+  - __Verification__: Asserts that an OperationCanceledException is thrown, proving the method's proper reaction to the cancellation signal, thus preventing unnecessary processing.
+
+### Methodology and Verification Explained
+
+#### Methodology
+Each test is crafted to simulate specific scenarios that the FileShareLibrary methods might encounter during runtime. This includes handling valid cases (where operations should succeed), dealing with incorrect inputs or states (like non-existent files or invalid data), and responding to external signals such as cancellation requests. The tests make use of the Moq library to mock external dependencies, allowing for isolated testing of the library's logic without interference from the file system or other components.
+
+#### Verification
+* __Success Condition Checks__: Most tests verify the operation's success by inspecting the Success property of the returned OperationResult. Success here means the operation was completed as intended without encountering unforeseen issues.
+* __Error Handling Checks__: For tests involving error scenarios, the verification involves ensuring the Success property is false and that the Errors collection within the OperationResult contains appropriate messages that accurately describe the encountered issue.
+* __Exception Handling Checks__: For tests that involve operation cancellation, the expected outcome is the throwing of an OperationCanceledException. This exception indicates that the method respected the cancellation token and ceased its operation promptly.
