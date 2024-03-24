@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "E:\\Projects\\OneBitProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A0AADDB1-C1F0-4916-98A7-A36E701DDDE0}|FileShareAPI\\FileShareAPI.csproj|e:\\projects\\onebitproject\\fileshareapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A0AADDB1-C1F0-4916-98A7-A36E701DDDE0}|FileShareAPI\\FileShareAPI.csproj|solutionrelative:fileshareapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B04E1780-F61A-4379-9CA7-D339EA3EAD91}|FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj|e:\\projects\\onebitproject\\filesharelibrary.tests\\filesharelibrary_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B04E1780-F61A-4379-9CA7-D339EA3EAD91}|FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj|solutionrelative:filesharelibrary.tests\\filesharelibrary_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|e:\\projects\\onebitproject\\filesharelibrary\\filesharecontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|solutionrelative:filesharelibrary\\filesharecontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|e:\\projects\\onebitproject\\filesharelibrary\\icontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|solutionrelative:filesharelibrary\\icontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|e:\\projects\\onebitproject\\filesharelibrary\\filesharecontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|solutionrelative:filesharelibrary\\filesharecontentprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|e:\\projects\\onebitproject\\filesharelibrary\\streaminfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1F046A0-806C-404D-B798-71C4F62BC875}|FileShareLibrary\\FileShareLibrary.csproj|solutionrelative:filesharelibrary\\streaminfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0AADDB1-C1F0-4916-98A7-A36E701DDDE0}|FileShareAPI\\FileShareAPI.csproj|e:\\projects\\onebitproject\\fileshareapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0AADDB1-C1F0-4916-98A7-A36E701DDDE0}|FileShareAPI\\FileShareAPI.csproj|solutionrelative:fileshareapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B04E1780-F61A-4379-9CA7-D339EA3EAD91}|FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj|e:\\projects\\onebitproject\\filesharelibrary.tests\\filesharelibrary_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B04E1780-F61A-4379-9CA7-D339EA3EAD91}|FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj|solutionrelative:filesharelibrary.tests\\filesharelibrary_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,52 +38,65 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "StreamInfo.cs",
+              "DocumentMoniker": "E:\\Projects\\OneBitProject\\FileShareLibrary\\StreamInfo.cs",
+              "RelativeDocumentMoniker": "FileShareLibrary\\StreamInfo.cs",
+              "ToolTip": "E:\\Projects\\OneBitProject\\FileShareLibrary\\StreamInfo.cs",
+              "RelativeToolTip": "FileShareLibrary\\StreamInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-24T14:06:06.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Projects\\OneBitProject\\FileShareAPI\\Program.cs",
               "RelativeDocumentMoniker": "FileShareAPI\\Program.cs",
               "ToolTip": "E:\\Projects\\OneBitProject\\FileShareAPI\\Program.cs",
               "RelativeToolTip": "FileShareAPI\\Program.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAAAQwE8AAAAoAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-23T14:42:57.953Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "FileShareLibrary_Tests.cs",
               "DocumentMoniker": "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary_Tests.cs",
               "RelativeDocumentMoniker": "FileShareLibrary.Tests\\FileShareLibrary_Tests.cs",
               "ToolTip": "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary_Tests.cs",
               "RelativeToolTip": "FileShareLibrary.Tests\\FileShareLibrary_Tests.cs",
-              "ViewState": "AQIAALYBAAAAAAAAAAAQwKwBAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-23T14:42:07.979Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "IContentProvider.cs",
               "DocumentMoniker": "E:\\Projects\\OneBitProject\\FileShareLibrary\\IContentProvider.cs",
               "RelativeDocumentMoniker": "FileShareLibrary\\IContentProvider.cs",
               "ToolTip": "E:\\Projects\\OneBitProject\\FileShareLibrary\\IContentProvider.cs",
               "RelativeToolTip": "FileShareLibrary\\IContentProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-23T14:41:42.04Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "FileShareContentProvider.cs",
               "DocumentMoniker": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareContentProvider.cs",
               "RelativeDocumentMoniker": "FileShareLibrary\\FileShareContentProvider.cs",
               "ToolTip": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareContentProvider.cs",
               "RelativeToolTip": "FileShareLibrary\\FileShareContentProvider.cs",
-              "ViewState": "AQIAADUBAAAAAAAAAAAQwFEBAAAAAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAowAEAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-23T14:41:28.037Z",
               "EditorCaption": ""

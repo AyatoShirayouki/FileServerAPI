@@ -68,3 +68,4 @@ C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareAPI\obj\Debug\net8.0\r
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareAPI\obj\Debug\net8.0\FileShareAPI.pdb
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareAPI\obj\Debug\net8.0\FileShareAPI.genruntimeconfig.cache
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareAPI\obj\Debug\net8.0\ref\FileShareAPI.dll
+E:\Projects\OneBitProject\FileShareAPI\obj\Debug\net8.0\FileShareAPI.sourcelink.json

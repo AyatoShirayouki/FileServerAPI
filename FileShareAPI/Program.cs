@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using FileShareLibrary;
 
 var builder = WebApplication.CreateBuilder(args);

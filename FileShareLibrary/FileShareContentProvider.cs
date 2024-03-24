@@ -1,11 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using OneBitSoftware.Utilities;
-using OneBitSoftware.Utilities.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileShareLibrary
 {
@@ -53,7 +47,6 @@ namespace FileShareLibrary
 				return string.Empty;
 			}
 
-			// Define known file signatures
 			var fileSignatures = new Dictionary<string, List<byte[]>>
 			{
 				{ ".gif", new List<byte[]> { new byte[] { 0x47, 0x49, 0x46, 0x38 } } },
@@ -87,14 +80,14 @@ namespace FileShareLibrary
 				{ ".xlsx", new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } } },
 				{ ".pptx", new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } } },
 				{ ".pdf", new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } } },
-				{ ".wav", new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } } }, // Further bytes needed for full signature
+				{ ".wav", new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } } },
 				{ ".mp3", new List<byte[]>
 					{
-						new byte[] { 0x49, 0x44, 0x33 }, // ID3v2 tag
-						new byte[] { 0xFF, 0xFB }, // MPEG-1 Layer III or MPEG-2 Layer III
+						new byte[] { 0x49, 0x44, 0x33 },
+						new byte[] { 0xFF, 0xFB },
 					}
 				},
-				{ ".txt", new List<byte[]> { } }, // Text files don't have a signature
+				{ ".txt", new List<byte[]> { } },
 				};
 
 			byte[] headerBytes = new byte[256];
@@ -206,7 +199,6 @@ namespace FileShareLibrary
 		public async Task<OperationResult> UpdateAsync(Guid id, StreamInfo fileContent, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult();
-			// Use a file pattern to match the GUID with any extension
 			var filePattern = $"{id}.*";
 			var directoryInfo = new DirectoryInfo(_fileSharePath);
 			var files = directoryInfo.GetFiles(filePattern);
@@ -221,7 +213,6 @@ namespace FileShareLibrary
 
 			try
 			{
-				// Assuming we update the first file if multiple files have the same GUID but different extensions
 				var filePath = files.First().FullName;
 				using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
 				{

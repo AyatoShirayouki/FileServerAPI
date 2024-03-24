@@ -22,3 +22,4 @@ C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8.0\refint\FileShareLibrary.dll
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.pdb
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8.0\ref\FileShareLibrary.dll
+E:\Projects\OneBitProject\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.sourcelink.json

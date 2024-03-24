@@ -234,3 +234,4 @@ E:\Projects\OneBitProject\FileShareLibrary.Tests\bin\Debug\net8.0\Microsoft.Exte
 E:\Projects\OneBitProject\FileShareLibrary.Tests\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 E:\Projects\OneBitProject\FileShareLibrary.Tests\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
 E:\Projects\OneBitProject\FileShareLibrary.Tests\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Projects\OneBitProject\FileShareLibrary.Tests\obj\Debug\net8.0\FileShareLibrary.Tests.sourcelink.json
