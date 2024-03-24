@@ -1,4 +1,46 @@
 # Project Documentation
+
+## Project Development Timeline: FileShareAPI, FileShareLibrary and FileShareLibrary.Tests
+
+* ### Day 1: Project Initialization and Planning
+  - #### Afternoon:
+    * Set up the initial project structure for FileShareAPI and FileShareLibrary.
+    * Created the solution file and added projects for the API and the library.
+    * Defined the core interfaces and classes in FileShareLibrary, including IContentProvider<Guid>, StreamInfo, and the start of FileShareContentProvider.
+    * Started on the StoreAsync method implementation.
+  - #### Evening:
+    * Researched file handling in .NET and best practices for asynchronous operations.
+    * Sketched out the endpoint designs for FileShareAPI.
+* ### Day 2: Core Functionality Development
+  - #### Morning:
+    * Implemented and tested StoreAsync, GetAsync, and DeleteAsync methods in FileShareContentProvider.
+  - #### Afternoon:
+    * Developed the FileShareAPI endpoints for upload, download, and delete operations.
+    * Conducted initial testing of the API endpoints using Postman.
+  - #### Evening:
+    * Added logging and error handling mechanisms to both the API and library.
+    * Started on the UpdateAsync method.
+* ### Day 3: Testing and Expansion
+  - #### Morning:
+    * Completed UpdateAsync, ExistsAsync, GetBytesAsync, and GetHashAsync methods.
+    * Expanded API endpoints to include checks for file existence, retrieval of bytes, and hash computation.
+  - #### Afternoon:
+    * Began writing unit tests for FileShareLibrary, covering success and error scenarios for StoreAsync and GetAsync.
+  - #### Evening:
+    * Continued unit testing with DeleteAsync, ExistsAsync, and UpdateAsync.
+    * Researched and applied mock setups using Moq for file I/O operations.
+* ### Day 4: Finalization and Documentation
+  - #### Morning:
+    * Finalized all unit tests for FileShareLibrary, ensuring high coverage.
+    * Conducted comprehensive testing of the FileShareAPI with various file types and sizes.
+  - #### Afternoon:
+    * Documented the API endpoints, describing request and response formats.
+    * Added inline comments and summaries to important methods and classes in the code.
+  - #### Evening:
+    * Compiled the project documentation, detailing setup, configuration, usage, and test cases.
+    * Reviewed the entire project for any missed bugs or improvements, making minor refinements.
+    * Prepared the project for deployment or sharing, including cleanup of unused references and final testing.
+
 ## Overview
 This project, FileShareAPI, is designed to manage file operations such as upload, download, deletion, and updates on a file share system. It leverages an ASP.NET Core Minimal API setup for handling HTTP requests and responses, alongside a library, FileShareLibrary, that encapsulates file operation logic.
 
