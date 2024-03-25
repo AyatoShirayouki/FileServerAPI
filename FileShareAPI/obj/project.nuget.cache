@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "GLO8kdc6L2j94sBbz6T3FtaSe1QvI/PwQs97ml3aiCSLE2kBrbo1dVIDnSvn9CUxLNd80R3GsnAnFmFFkvT5PQ==",
+  "dgSpecHash": "NqAWy9TrHwJLwinEcjvy6RNPGoJQVbKf0uTENm7wIveS0sRwCf1OQnOwLt6iv1upkXOm5kKbRggmU6jEyIEf+g==",
   "success": true,
-  "projectFilePath": "E:\\Projects\\OneBitProject\\FileShareAPI\\FileShareAPI.csproj",
+  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\trail\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\onebitsoftware.utilities.operationresult\\1.4.6\\onebitsoftware.utilities.operationresult.1.4.6.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
-    "C:\\Users\\trail\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+    "C:\\Users\\alex\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\onebitsoftware.utilities.operationresult\\1.4.6\\onebitsoftware.utilities.operationresult.1.4.6.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\alex\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -23,3 +23,16 @@ C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.pdb
 C:\Projects\C#Projects\TaskManager\OneBitProject\FileShareLibrary\obj\Debug\net8.0\ref\FileShareLibrary.dll
 E:\Projects\OneBitProject\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.sourcelink.json
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\bin\Debug\net8.0\FileShareLibrary.deps.json
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\bin\Debug\net8.0\FileShareLibrary.dll
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\bin\Debug\net8.0\FileShareLibrary.pdb
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.csproj.AssemblyReference.cache
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.AssemblyInfoInputs.cache
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.AssemblyInfo.cs
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.csproj.CoreCompileInputs.cache
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.sourcelink.json
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.dll
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\refint\FileShareLibrary.dll
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\FileShareLibrary.pdb
+C:\Projects\C#Projects\TaskManager\OneBitProject\FileServerAPI\FileShareLibrary\obj\Debug\net8.0\ref\FileShareLibrary.dll

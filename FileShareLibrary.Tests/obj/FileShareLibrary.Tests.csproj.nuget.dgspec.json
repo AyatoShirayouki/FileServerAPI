@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj": {}
+    "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj": {
+    "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
+        "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
         "projectName": "FileShareLibrary.Tests",
-        "projectPath": "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
-        "packagesPath": "C:\\Users\\trail\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\OneBitProject\\FileShareLibrary.Tests\\obj\\",
+        "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
+        "packagesPath": "C:\\Users\\alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\System\\Applications\\VisualStudio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\trail\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj": {
-                "projectPath": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj"
+              "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
+                "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj"
               }
             }
           }
@@ -107,20 +106,20 @@
         }
       }
     },
-    "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj": {
+    "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj",
+        "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
         "projectName": "FileShareLibrary",
-        "projectPath": "E:\\Projects\\OneBitProject\\FileShareLibrary\\FileShareLibrary.csproj",
-        "packagesPath": "C:\\Users\\trail\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\OneBitProject\\FileShareLibrary\\obj\\",
+        "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
+        "packagesPath": "C:\\Users\\alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\System\\Applications\\VisualStudio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\trail\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -129,7 +128,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
