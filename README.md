@@ -49,6 +49,13 @@ This project, FileShareAPI, is designed to manage file operations such as upload
 
 * __FileShareAPI__: A web API that exposes endpoints for file operations.
 * __FileShareLibrary__: A class library that provides the core functionality for file operations.
+* __FileShareLibrary.Tests__: A class library that tests the core functionality for file operations.
+
+## Configuring the project:
+* Running the tests:
+  - Navigate to __FileShareLibrary.Tests__, open __appsettings.json__, and change the path in the "FileSharePath" variable.
+* Running the API: 
+  - Navigate to __FileShareAPI__, open __appsettings.json__, and change the path in the "FileSharePath" variable.
   
 ## FileShareAPI
 The FileShareAPI component defines HTTP endpoints for uploading, downloading, updating, deleting, checking existence, retrieving bytes, and computing hashes of files. It uses the FileShareLibrary for the implementation of these operations.
