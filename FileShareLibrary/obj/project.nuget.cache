@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yTlbqWeIzF79InCVGQjwtMOJyR29zuoNLq6Ys3iGEqwhL38V4A8qENRyXbmuAH4QS/xl4TVU/DKGVyAOkpMyAQ==",
+  "dgSpecHash": "40As4mxIEDVA97hK20JgEPI3Hm91qY/vPBOVTGOyRtaQEFwcR2+CcP/+c5sb3mJvnBPkDb7lwBxw8UZap4hqqg==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
+  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alex\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
     "C:\\Users\\alex\\.nuget\\packages\\onebitsoftware.utilities.operationresult\\1.4.6\\onebitsoftware.utilities.operationresult.1.4.6.nupkg.sha512"

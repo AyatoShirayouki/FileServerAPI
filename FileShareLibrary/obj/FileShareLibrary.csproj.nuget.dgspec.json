@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {}
+    "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
+    "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
+        "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
         "projectName": "FileShareLibrary",
-        "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
+        "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj",
         "packagesPath": "C:\\Users\\alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\obj\\",
+        "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

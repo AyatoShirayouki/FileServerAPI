@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NqAWy9TrHwJLwinEcjvy6RNPGoJQVbKf0uTENm7wIveS0sRwCf1OQnOwLt6iv1upkXOm5kKbRggmU6jEyIEf+g==",
+  "dgSpecHash": "hYrh407V5p/kzhs6hjEv4c/WywKucYcGNMAM+iGnZJVAlQjVTcA1v2lVURlu8z3BiK3nBPDmN3RGplGSd+wvXw==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
+  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alex\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\alex\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",

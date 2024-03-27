@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q4alZdl33hqnQrHU8DewoO3E9OdRBCW7Up0EEYCSWN0vUJ1a/Q9QJHZKTmsRsFSi3s2dgrSUNzttkb6fjVMvSQ==",
+  "dgSpecHash": "0vgcETvDU4FMHZ3csaeVNGtspUmADQMZ9mAf4FI416MfHwxbPHfFcwpXSimWbR4hBmz10J85JFeO2Toii3mRhw==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
+  "projectFilePath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary.Tests\\FileShareLibrary.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alex\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\alex\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",

@@ -8,7 +8,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 });
 
 var fileSharePath = builder.Configuration.GetValue<string>("FileSharePath");
-builder.Services.AddSingleton<IContentProvider<Guid>>(serviceProvider =>
+builder.Services.AddSingleton<IContentProvider<StringKey>>(serviceProvider =>
 {
 	var logger = serviceProvider.GetRequiredService<ILogger<FileShareContentProvider>>();
 	return new FileShareContentProvider(fileSharePath, logger);
@@ -28,49 +28,48 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/upload", async (IFormFile file, IContentProvider<Guid> provider, ILogger<FileShareContentProvider> logger) =>
+app.MapPost("/upload", async (IFormFile file, IContentProvider<StringKey> provider, ILogger<FileShareContentProvider> logger) =>
 {
-	var fileId = Guid.NewGuid();
+	var fileName = Path.GetFileName(file.FileName); // Use the uploaded file's name directly
 	using var stream = file.OpenReadStream();
 	var streamInfo = new StreamInfo { Stream = stream, Length = stream.Length };
-	var result = await provider.StoreAsync(fileId, streamInfo, CancellationToken.None);
-	return result.Success ? Results.Ok($"File uploaded with ID: {fileId}") : Results.BadRequest(result.Errors);
-}).AllowAnonymous().DisableAntiforgery(); 
+	var result = await provider.StoreAsync(fileName, streamInfo, CancellationToken.None);
+	return result.Success ? Results.Ok($"File uploaded: {fileName}") : Results.BadRequest(result.Errors);
+}).AllowAnonymous().DisableAntiforgery();
 
-app.MapGet("/download/{fileId}", async (Guid fileId, IContentProvider<Guid> provider) =>
+app.MapGet("/download/{fileName}", async (string fileName, IContentProvider<StringKey> provider) =>
 {
-	var result = await provider.GetAsync(fileId, CancellationToken.None);
+	var result = await provider.GetAsync(fileName, CancellationToken.None);
 	if (!result.Success)
 	{
 		return Results.NotFound("File not found.");
 	}
-	return Results.File(result.ResultObject.Stream, "application/octet-stream", $"{fileId}");
-}).AllowAnonymous().DisableAntiforgery(); 
-
-app.MapDelete("/delete/{fileId}", async (Guid fileId, IContentProvider<Guid> provider) =>
-{
-	var result = await provider.DeleteAsync(fileId, CancellationToken.None);
-	return result.Success ? Results.Ok("File deleted.") : Results.NotFound("File not found.");
+	return Results.File(result.ResultObject.Stream, "application/octet-stream", fileName);
 }).AllowAnonymous().DisableAntiforgery();
 
-
-app.MapGet("/exists/{fileId}", async (Guid fileId, IContentProvider<Guid> provider) =>
+app.MapDelete("/delete/{fileName}", async (string fileName, IContentProvider<StringKey> provider) =>
 {
-	var result = await provider.ExistsAsync(fileId, CancellationToken.None);
-	return result.ResultObject ? Results.Ok("File exists.") : Results.NotFound("File not found.");
+	var result = await provider.DeleteAsync(fileName, CancellationToken.None);
+	return result.Success ? Results.Ok($"File deleted: {fileName}") : Results.NotFound("File not found.");
 }).AllowAnonymous().DisableAntiforgery();
 
-app.MapPut("/update/{fileId}", async (Guid fileId, IFormFile file, IContentProvider<Guid> provider, ILogger<FileShareContentProvider> logger) =>
+app.MapGet("/exists/{fileName}", async (string fileName, IContentProvider<StringKey> provider) =>
+{
+	var result = await provider.ExistsAsync(fileName, CancellationToken.None);
+	return result.ResultObject ? Results.Ok($"File exists: {fileName}") : Results.NotFound("File not found.");
+}).AllowAnonymous().DisableAntiforgery();
+
+app.MapPut("/update/{fileName}", async (string fileName, IFormFile file, IContentProvider<StringKey> provider, ILogger<FileShareContentProvider> logger) =>
 {
 	using var stream = file.OpenReadStream();
 	var streamInfo = new StreamInfo { Stream = stream, Length = stream.Length };
-	var result = await provider.UpdateAsync(fileId, streamInfo, CancellationToken.None);
-	return result.Success ? Results.Ok($"File {fileId} updated.") : Results.BadRequest(result.Errors);
+	var result = await provider.UpdateAsync(fileName, streamInfo, CancellationToken.None);
+	return result.Success ? Results.Ok($"File updated: {fileName}") : Results.BadRequest(result.Errors);
 }).AllowAnonymous().DisableAntiforgery();
 
-app.MapGet("/bytes/{fileId}", async (Guid fileId, IContentProvider<Guid> provider) =>
+app.MapGet("/bytes/{fileName}", async (string fileName, IContentProvider<StringKey> provider) =>
 {
-	var result = await provider.GetBytesAsync(fileId, CancellationToken.None);
+	var result = await provider.GetBytesAsync(fileName, CancellationToken.None);
 	if (!result.Success)
 	{
 		return Results.NotFound("File not found.");
@@ -78,9 +77,9 @@ app.MapGet("/bytes/{fileId}", async (Guid fileId, IContentProvider<Guid> provide
 	return Results.Ok(result.ResultObject);
 }).AllowAnonymous().DisableAntiforgery();
 
-app.MapGet("/hash/{fileId}", async (Guid fileId, IContentProvider<Guid> provider) =>
+app.MapGet("/hash/{fileName}", async (string fileName, IContentProvider<StringKey> provider) =>
 {
-	var result = await provider.GetHashAsync(fileId, CancellationToken.None);
+	var result = await provider.GetHashAsync(fileName, CancellationToken.None);
 	if (!result.Success)
 	{
 		return Results.NotFound("File not found.");

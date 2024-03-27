@@ -6,7 +6,7 @@
   - #### Afternoon:
     * Set up the initial project structure for FileShareAPI and FileShareLibrary.
     * Created the solution file and added projects for the API and the library.
-    * Defined the core interfaces and classes in FileShareLibrary, including IContentProvider<Guid>, StreamInfo, and the start of FileShareContentProvider.
+    * Defined the core interfaces and classes in FileShareLibrary, including IContentProvider<StringKey>, StreamInfo, and the start of FileShareContentProvider.
     * Started on the StoreAsync method implementation.
   - #### Evening:
     * Researched file handling in .NET and best practices for asynchronous operations.
@@ -64,13 +64,13 @@ The FileShareAPI component defines HTTP endpoints for uploading, downloading, up
 The API is configured to handle files up to 50 MB in size, as defined in the ConfigureKestrel server options. The file share path is read from configuration settings, allowing dynamic determination of the file storage location.
 
 ### Endpoints
-POST /upload: Uploads a file to the file share. It expects an IFormFile in the request and uses the StoreAsync method of the IContentProvider<Guid> to save the file.
+POST /upload: Uploads a file to the file share. It expects an IFormFile in the request and uses the StoreAsync method of the IContentProvider<StringKey> to save the file.
 
-GET /download/{fileId}: Downloads a file by its GUID. It uses the GetAsync method to retrieve the file stream and returns it as an application/octet-stream response.
+GET /download/{fileId}: Downloads a file by its StringKey. It uses the GetAsync method to retrieve the file stream and returns it as an application/octet-stream response.
 
-DELETE /delete/{fileId}: Deletes a file by its GUID. It calls the DeleteAsync method to remove the file from the file share.
+DELETE /delete/{fileId}: Deletes a file by its StringKey. It calls the DeleteAsync method to remove the file from the file share.
 
-GET /exists/{fileId}: Checks if a file exists by its GUID. It utilizes the ExistsAsync method to verify the presence of the file.
+GET /exists/{fileId}: Checks if a file exists by its StringKey. It utilizes the ExistsAsync method to verify the presence of the file.
 
 PUT /update/{fileId}: Updates an existing file with new content. This endpoint expects an IFormFile and uses the UpdateAsync method to overwrite the existing file.
 
@@ -81,23 +81,34 @@ GET /hash/{fileId}: Computes and returns the SHA-256 hash of a file. It utilizes
 Each endpoint is configured to disable antiforgery token validation and allow anonymous access for simplicity. Depending on the application's security requirements, these settings can be adjusted.
 
 ## FileShareLibrary
-The FileShareLibrary provides the implementation of file operations. It defines the IContentProvider<Guid> interface and its implementation, FileShareContentProvider, to perform actions on files identified by GUIDs.
+The FileShareLibrary provides the implementation of file operations. It defines the IContentProvider<StringKey> interface and its implementation, FileShareContentProvider, to perform actions on files identified by StringKeys.
+
+## StringKey
+
+### Purpose of StringKey
+The primary purpose of introducing StringKey is to enhance the clarity and manageability of file operations by using a more descriptive identifier than a Guid. A Guid is a 128-bit integer used as a unique identifier, which, while excellent for ensuring uniqueness, does not convey any meaningful information about the file it represents. In contrast, a StringKey could include the file's name and possibly its extension, making it easier for developers and systems to identify and manage files based on their names directly.
+
+### Features of StringKey
+
+* __Immutability__: As a struct, StringKey is a value type, and this example makes it immutable. Once created with a file name and extension, it cannot be changed. This immutability is beneficial for use as a key in dictionaries or other collections that rely on the consistency of hash codes.
+* __Meaningful Identification__: By incorporating the file's name and extension into the key directly, StringKey allows for more readable and understandable code when dealing with file operations. It can improve logging, error messages, and debugging by providing more context than a Guid.
+* __Flexibility__: Additional functionality can be easily added to the StringKey struct, such as validation, formatting methods, or conversion helpers, to further ease working with file identifiers.
 
 ## FileShareContentProvider
-This class implements the IContentProvider<Guid> interface, handling the logic for file storage, retrieval, updating, and deletion. It determines file extensions based on file content, supporting various file types, and performs operations in a designated file share path.
+This class implements the IContentProvider<StringKey> interface, handling the logic for file storage, retrieval, updating, and deletion. It determines file extensions based on file content, supporting various file types, and performs operations in a designated file share path.
 
 ### Key Methods
 
-#### StoreAsync(Guid id, StreamInfo fileContent, CancellationToken cancellationToken)
+#### StoreAsync(StringKey id, StreamInfo fileContent, CancellationToken cancellationToken)
 Stores a file in the specified file share path. It generates a unique file name using the provided id and determines the file extension based on the content's signature to support various file types correctly. This method ensures files are stored securely and reliably, even in the face of network or system failures, by leveraging .NET's file stream capabilities.
 
 ##### Parameters:
-* __id__: A Guid serving as a unique identifier for the file.
+* __id__: A StringKey serving as a unique identifier for the file.
 * __fileContent__: A StreamInfo object containing the file's stream and length.
 * __cancellationToken__: A CancellationToken for handling request cancellations.
 * __Returns__: An OperationResult indicating the success or failure of the operation, including error messages if applicable.
   
-#### GetAsync(Guid id, CancellationToken cancellationToken)
+#### GetAsync(StringKey id, CancellationToken cancellationToken)
 Retrieves a file's stream and information for downloading by matching the id with files in the storage path. This method is optimized to handle large files efficiently, minimizing memory usage by streaming file contents directly from disk to the network.
 
 ##### Parameters:
@@ -105,24 +116,24 @@ Retrieves a file's stream and information for downloading by matching the id wit
 * __cancellationToken__: A token for canceling the operation if necessary.
 * __Returns__: An OperationResult<StreamInfo> containing the file's stream and size if successful, or error information if not.
   
-### UpdateAsync(Guid id, StreamInfo fileContent, CancellationToken cancellationToken)
+### UpdateAsync(StringKey id, StreamInfo fileContent, CancellationToken cancellationToken)
 Updates an existing file with new content. It first checks for the file's existence by id and then overwrites it with the new content provided in fileContent. This method is critical for maintaining the integrity and up-to-dateness of files in the system.
 
 #### Parameters:
-* __id__: The Guid identifying the file to update.
+* __id__: The StringKey identifying the file to update.
 * __fileContent__: The new content to write to the file, encapsulated in a StreamInfo object.
 * __cancellationToken__: Allows the operation to be cancelled.
 * __Returns__: An OperationResult indicating the outcome of the update operation.
   
-### DeleteAsync(Guid id, CancellationToken cancellationToken)
+### DeleteAsync(StringKey id, CancellationToken cancellationToken)
 Removes a file from the file share. It searches for the file by id and deletes it if found. This method ensures that all traces of the file are removed from the system, freeing up space and maintaining the cleanliness of the storage area.
 
 #### Parameters:
-* __id__: The Guid of the file to delete.
+* __id__: The StringKey of the file to delete.
 * __cancellationToken__: A token that can be used to request cancellation of the operation.
 * __Returns__: An OperationResult indicating whether the deletion was successful or if errors occurred.
 
-### ExistsAsync(Guid id, CancellationToken cancellationToken)
+### ExistsAsync(StringKey id, CancellationToken cancellationToken)
 Checks if a file exists in the file share. By searching for a file with the given id, this method quickly determines file presence, which is essential for validation checks before attempting to access or manipulate files.
 
 #### Parameters:
@@ -130,7 +141,7 @@ Checks if a file exists in the file share. By searching for a file with the give
 * __cancellationToken__: A cancellation token for the operation.
 * __Returns__: An OperationResult<bool> indicating the existence of the file.
 
-### GetHashAsync(Guid id, CancellationToken cancellationToken)
+### GetHashAsync(StringKey id, CancellationToken cancellationToken)
 Computes and returns the SHA-256 hash of a file. This method is vital for verifying the integrity of files and ensuring they have not been tampered with. It reads the file stream associated with the id, computes its hash, and returns the hash value as a string.
 
 #### Parameters:
@@ -154,7 +165,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### StoreAsync_SuccessfullyStoresFile_ReturnsSuccess
   - __Objective__: This test ensures the StoreAsync method can successfully store a file when given valid input.
-  - __Methodology__: It mocks a StreamInfo object representing the file to be stored and invokes StoreAsync with a new GUID. The test verifies if the operation is marked as successful.
+  - __Methodology__: It mocks a StreamInfo object representing the file to be stored and invokes StoreAsync with a new StringKey. The test verifies if the operation is marked as successful.
   - __Verification__: Asserts that the Success property of the returned OperationResult is true, indicating the operation succeeded without issues.
     
 * #### StoreAsync_WithCancellation_ThrowsOperationCanceledException
@@ -164,7 +175,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
     
 * #### UpdateAsync_FileDoesNotExist_ReturnsError
   - __Objective__: Verifies that UpdateAsync correctly handles attempts to update a non-existent file by returning an error.
-  - __Methodology__: Attempts to update a file using a GUID that does not correspond to any existing file. It checks the method's response for error messages.
+  - __Methodology__: Attempts to update a file using a StringKey that does not correspond to any existing file. It checks the method's response for error messages.
   - __Verification__: Asserts that the Success flag is false and the Errors collection contains relevant error messages.
 
 * #### GetAsync_FileExists_ReturnsStreamInfo
@@ -179,7 +190,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### GetAsync_FileNotFound_ReturnsError
   - __Objective__: Confirms that GetAsync responds with an appropriate error when requested to retrieve a file that does not exist.
-  - __Methodology__: Invokes GetAsync with a GUID for a non-existent file and examines the response for error indications.
+  - __Methodology__: Invokes GetAsync with a StringKey for a non-existent file and examines the response for error indications.
   - __Verification__: Checks that Success is false and that the errors indicate the file could not be found.
 
 * #### GetBytesAsync_ExtremelyLargeFile_ReturnsErrorOrHandlesGracefully
@@ -199,7 +210,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### ExistsAsync_FileExists_ReturnsTrue
   - __Objective__: Checks if ExistsAsync accurately determines the existence of a file.
-  - __Methodology__: After creating a file, ExistsAsync is used to check for its presence based on its GUID.
+  - __Methodology__: After creating a file, ExistsAsync is used to check for its presence based on its StringKey.
   - __Verification__: Asserts that the result indicates the file exists, validating the method's ability to detect existing files.
 
 * #### UpdateAsync_WithCancellation_ThrowsOperationCanceledException
@@ -229,7 +240,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### ExistsAsync_FileDoesNotExist_ReturnsFalse
   - __Objective__: Ensures ExistsAsync accurately reports the non-existence of a file.
-  - __Methodology__: ExistsAsync is invoked with a GUID that does not match any existing file in the system. The method should then return a result indicating the file does not exist.
+  - __Methodology__: ExistsAsync is invoked with a StringKey that does not match any existing file in the system. The method should then return a result indicating the file does not exist.
   - __Verification__: Verifies that the operation result indicates the file does not exist (ResultObject is false) and the operation itself is considered unsuccessful (Success is false).
 
 * #### DeleteAsync_FileExists_DeletesFileSuccessfully
@@ -239,7 +250,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### DeleteAsync_FileDoesNotExist_ReturnsError
   - __Objective__: Checks DeleteAsync's error handling when attempting to delete a file that doesn't exist.
-  - __Methodology__: Attempts to delete a file using a GUID for a non-existent file and examines the response for appropriate error handling.
+  - __Methodology__: Attempts to delete a file using a StringKey for a non-existent file and examines the response for appropriate error handling.
   - __Verification__: Asserts the operation was not successful (Success is false) and verifies the presence of error messages indicating the file could not be found.
 
 * #### DeleteAsync_WithCancellation_ThrowsOperationCanceledException
@@ -254,7 +265,7 @@ Tests are configured with a mock file share path and use the Moq library to mock
 
 * #### GetHashAsync_FileDoesNotExist_ReturnsError
   - __Objective__: Tests GetHashAsync's response when attempting to compute the hash of a non-existent file.
-  - __Methodology__: Invokes GetHashAsync with a GUID for a file that does not exist, expecting the
+  - __Methodology__: Invokes GetHashAsync with a StringKey for a file that does not exist, expecting the
   - __Verification__: Ensures the operation returns a failure (Success is false) and the errors convey that the file could not be found, verifying appropriate error handling for absent files.
 
 * #### GetHashAsync_WithCancellation_ThrowsOperationCanceledException

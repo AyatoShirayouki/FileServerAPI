@@ -3,7 +3,7 @@ using OneBitSoftware.Utilities;
 
 namespace FileShareLibrary
 {
-	public class FileShareContentProvider : IContentProvider<Guid>
+	public class FileShareContentProvider : IContentProvider<StringKey>
 	{
 		private readonly string _fileSharePath;
 		private readonly ILogger<FileShareContentProvider> _logger;
@@ -14,11 +14,9 @@ namespace FileShareLibrary
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		}
 
-		public async Task<OperationResult> StoreAsync(Guid id, StreamInfo fileContent, CancellationToken cancellationToken)
+		public async Task<OperationResult> StoreAsync(StringKey fileName, StreamInfo fileContent, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult();
-			var fileExtension = DetermineFileExtension(fileContent.Stream);
-			var fileName = $"{id}{fileExtension}";
 			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			cancellationToken.ThrowIfCancellationRequested();
@@ -29,7 +27,7 @@ namespace FileShareLibrary
 				{
 					fileContent.Stream.Position = 0;
 					await fileContent.Stream.CopyToAsync(fileStream, cancellationToken);
-					operationResult.AddSuccessMessage("File stored successfully.");
+					operationResult.AddSuccessMessage($"File {fileName} stored successfully.");
 				}
 			}
 			catch (Exception ex)
@@ -40,124 +38,30 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-		private string DetermineFileExtension(Stream fileStream)
-		{
-			if (fileStream == null || fileStream.Length < 8)
-			{
-				return string.Empty;
-			}
-
-			var fileSignatures = new Dictionary<string, List<byte[]>>
-			{
-				{ ".gif", new List<byte[]> { new byte[] { 0x47, 0x49, 0x46, 0x38 } } },
-				{ ".png", new List<byte[]> { new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A } } },
-				{ ".jpeg", new List<byte[]>
-					{
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE2 },
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE3 },
-					}
-				},
-				{ ".jpg", new List<byte[]>
-					{
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE1 },
-						new byte[] { 0xFF, 0xD8, 0xFF, 0xE8 },
-					}
-				},
-				{ ".zip", new List<byte[]>
-					{
-						new byte[] { 0x50, 0x4B, 0x03, 0x04 },
-						new byte[] { 0x50, 0x4B, 0x4C, 0x49, 0x54, 0x45 },
-						new byte[] { 0x50, 0x4B, 0x53, 0x70, 0x58 },
-						new byte[] { 0x50, 0x4B, 0x05, 0x06 },
-						new byte[] { 0x50, 0x4B, 0x07, 0x08 },
-						new byte[] { 0x57, 0x69, 0x6E, 0x5A, 0x69, 0x70 },
-					}
-				},
-				{ ".rar", new List<byte[]> { new byte[] { 0x52, 0x61, 0x72, 0x21 } } },
-				{ ".docx", new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } } },
-				{ ".xlsx", new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } } },
-				{ ".pptx", new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } } },
-				{ ".pdf", new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } } },
-				{ ".wav", new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } } },
-				{ ".mp3", new List<byte[]>
-					{
-						new byte[] { 0x49, 0x44, 0x33 },
-						new byte[] { 0xFF, 0xFB },
-					}
-				},
-				{ ".txt", new List<byte[]> { } },
-				};
-
-			byte[] headerBytes = new byte[256];
-			fileStream.Read(headerBytes, 0, headerBytes.Length);
-			int bytesRead = fileStream.Read(headerBytes, 0, headerBytes.Length);
-			fileStream.Position = 0;
-
-			foreach (var fileSignature in fileSignatures)
-			{
-				foreach (var signature in fileSignature.Value)
-				{
-					if (!signature.Any() || headerBytes.Take(signature.Length).SequenceEqual(signature))
-					{
-						if (fileSignature.Key == ".txt" && !IsLikelyTextFile(headerBytes, bytesRead))
-						{
-							continue;
-						}
-
-						return fileSignature.Key;
-					}
-				}
-			}
-
-			if (IsLikelyTextFile(headerBytes, bytesRead))
-			{
-				return ".txt";
-			}
-
-			return string.Empty;
-		}
-
-
-		private bool IsLikelyTextFile(byte[] buffer, int length)
-		{
-			for (int i = 0; i < length; i++)
-			{
-				byte b = buffer[i];
-				if (b != 9 && b != 10 && b != 13 && (b < 32 || b > 126))
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		public async Task<OperationResult<StreamInfo>> GetAsync(Guid id, CancellationToken cancellationToken)
+		public async Task<OperationResult<StreamInfo>> GetAsync(StringKey fileName, CancellationToken cancellationToken)
 		{
 			cancellationToken.ThrowIfCancellationRequested();
 
 			var operationResult = new OperationResult<StreamInfo>();
-			var filePattern = $"{id}.*";
-			var directoryInfo = new DirectoryInfo(_fileSharePath);
-			var file = directoryInfo.GetFiles(filePattern).FirstOrDefault();
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
-			if (file == null)
+			if (!File.Exists(filePath))
 			{
-				operationResult.AppendError($"File with ID {id} does not exist.");
+				operationResult.AppendError($"File {fileName} does not exist.");
 				return operationResult;
 			}
 
 			try
 			{
-				var stream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
+				var fileInfo = new FileInfo(filePath);
+				var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 				var streamInfo = new StreamInfo
 				{
-					Length = file.Length,
+					Length = fileInfo.Length,
 					Stream = stream
 				};
 				operationResult.ResultObject = streamInfo;
-				operationResult.AddSuccessMessage("File retrieved successfully.");
+				operationResult.AddSuccessMessage($"File {fileName} retrieved successfully.");
 			}
 			catch (Exception ex)
 			{
@@ -167,10 +71,10 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-		public async Task<OperationResult<byte[]>> GetBytesAsync(Guid id, CancellationToken cancellationToken)
+		public async Task<OperationResult<byte[]>> GetBytesAsync(StringKey fileName, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult<byte[]>();
-			var filePath = Path.Combine(_fileSharePath, id.ToString());
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			if (cancellationToken.IsCancellationRequested)
 			{
@@ -181,13 +85,13 @@ namespace FileShareLibrary
 			{
 				if (!File.Exists(filePath))
 				{
-					operationResult.AppendError($"File with ID {id} does not exist.");
+					operationResult.AppendError($"File {fileName} does not exist.");
 					return operationResult;
 				}
 
 				var bytes = await File.ReadAllBytesAsync(filePath, cancellationToken);
 				operationResult.ResultObject = bytes;
-				operationResult.AddSuccessMessage("File bytes retrieved successfully.");
+				operationResult.AddSuccessMessage($"File {fileName} bytes retrieved successfully.");
 			}
 			catch (Exception ex)
 			{
@@ -196,28 +100,25 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-		public async Task<OperationResult> UpdateAsync(Guid id, StreamInfo fileContent, CancellationToken cancellationToken)
+		public async Task<OperationResult> UpdateAsync(StringKey fileName, StreamInfo fileContent, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult();
-			var filePattern = $"{id}.*";
-			var directoryInfo = new DirectoryInfo(_fileSharePath);
-			var files = directoryInfo.GetFiles(filePattern);
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			cancellationToken.ThrowIfCancellationRequested();
 
-			if (!files.Any())
+			if (!File.Exists(filePath))
 			{
-				operationResult.AppendError($"File with ID {id} does not exist.");
+				operationResult.AppendError($"File {fileName} does not exist.");
 				return operationResult;
 			}
 
 			try
 			{
-				var filePath = files.First().FullName;
 				using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
 				{
 					await fileContent.Stream.CopyToAsync(fileStream, cancellationToken);
-					operationResult.AddSuccessMessage("File updated successfully.");
+					operationResult.AddSuccessMessage($"File {fileName} updated successfully.");
 				}
 			}
 			catch (Exception ex)
@@ -227,28 +128,23 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-		public async Task<OperationResult> DeleteAsync(Guid id, CancellationToken cancellationToken)
+		public async Task<OperationResult> DeleteAsync(StringKey fileName, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult();
-			var filePattern = $"{id}.*";
-			var directoryInfo = new DirectoryInfo(_fileSharePath);
-			var files = directoryInfo.GetFiles(filePattern);
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			cancellationToken.ThrowIfCancellationRequested();
 
 			try
 			{
-				if (files.Length == 0)
+				if (!File.Exists(filePath))
 				{
-					operationResult.AppendError($"File with ID {id} does not exist.");
+					operationResult.AppendError($"File {fileName} does not exist.");
 				}
 				else
 				{
-					foreach (var file in files)
-					{
-						File.Delete(file.FullName);
-					}
-					operationResult.AddSuccessMessage("File deleted successfully.");
+					File.Delete(filePath);
+					operationResult.AddSuccessMessage($"File {fileName} deleted successfully.");
 				}
 			}
 			catch (Exception ex)
@@ -259,30 +155,27 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-		public async Task<OperationResult<string>> GetHashAsync(Guid id, CancellationToken cancellationToken)
+		public async Task<OperationResult<string>> GetHashAsync(StringKey fileName, CancellationToken cancellationToken)
 		{
 			var operationResult = new OperationResult<string>();
-			var filePattern = $"{id}.*";
-			var directoryInfo = new DirectoryInfo(_fileSharePath);
-			var files = directoryInfo.GetFiles(filePattern);
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			cancellationToken.ThrowIfCancellationRequested();
 
-			if (!files.Any())
+			if (!File.Exists(filePath))
 			{
-				operationResult.AppendError($"File with ID {id} does not exist.");
+				operationResult.AppendError($"File {fileName} does not exist.");
 				return operationResult;
 			}
 
 			try
 			{
-				var file = files.First();
-				using (var stream = File.OpenRead(file.FullName))
+				using (var stream = File.OpenRead(filePath))
 				{
 					var hash = System.Security.Cryptography.SHA256.Create();
 					byte[] hashBytes = await hash.ComputeHashAsync(stream, cancellationToken);
 					operationResult.ResultObject = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-					operationResult.AddSuccessMessage("File hash computed successfully.");
+					operationResult.AddSuccessMessage($"File {fileName} hash computed successfully.");
 				}
 			}
 			catch (Exception ex)
@@ -293,23 +186,20 @@ namespace FileShareLibrary
 			return operationResult;
 		}
 
-
-		public async Task<OperationResult<bool>> ExistsAsync(Guid id, CancellationToken cancellationToken)
+		public async Task<OperationResult<bool>> ExistsAsync(StringKey fileName, CancellationToken cancellationToken)
 		{
 			cancellationToken.ThrowIfCancellationRequested();
 
 			var operationResult = new OperationResult<bool>();
-			var filePattern = $"{id}.*";
-			var directoryInfo = new DirectoryInfo(_fileSharePath);
-			var files = directoryInfo.GetFiles(filePattern);
+			var filePath = Path.Combine(_fileSharePath, fileName);
 
 			try
 			{
-				bool exists = files.Any();
+				bool exists = File.Exists(filePath);
 				operationResult.ResultObject = exists;
 				if (exists)
 				{
-					operationResult.AddSuccessMessage("File exists.");
+					operationResult.AddSuccessMessage($"File {fileName} exists.");
 				}
 				else
 				{

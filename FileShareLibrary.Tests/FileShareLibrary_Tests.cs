@@ -27,12 +27,13 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var fileName = "StoreAsync_SuccessfullyStoresFile_ReturnsSuccess.txt";
 			var mockStreamInfo = new StreamInfo { Stream = new MemoryStream(), Length = 100 };
 
-			var result = await provider.StoreAsync(testFileId, mockStreamInfo, CancellationToken.None);
+			var result = await provider.StoreAsync(fileName, mockStreamInfo, CancellationToken.None);
 
 			Assert.True(result.Success);
+			File.Delete(Path.Combine(_fileSharePath, fileName));
 		}
 
 		[Fact]
@@ -43,7 +44,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "StoreAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 			var mockStreamInfo = new StreamInfo { Stream = new MemoryStream(), Length = 100 };
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
@@ -55,7 +56,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "UpdateAsync_FileDoesNotExist_ReturnsError.txt";
 			var mockStreamInfo = new StreamInfo { Stream = new MemoryStream(), Length = 100 };
 
 			var result = await provider.UpdateAsync(testFileId, mockStreamInfo, CancellationToken.None);
@@ -69,7 +70,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetAsync_FileExists_ReturnsStreamInfo.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Test content");
@@ -106,7 +107,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetBytesAsync_LargeFile_ReturnsBytesWithCorrectLength.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			const int expectedFileSize = 1024 * 1024 * 50;
@@ -140,7 +141,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetAsync_FileNotFound_ReturnsError.txt";
 
 			var result = await provider.GetAsync(testFileId, CancellationToken.None);
 
@@ -153,7 +154,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetBytesAsync_ExtremelyLargeFile_ReturnsErrorOrHandlesGracefully.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			const int largeFileSize = 1024 * 1024 * 50;
@@ -192,7 +193,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "UpdateAsync_SimultaneousAccess_ReturnsTrue.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Initial content");
@@ -218,7 +219,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetBytesAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 			var cancellationTokenSource = new CancellationTokenSource();
 
 			cancellationTokenSource.Cancel();
@@ -232,7 +233,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "ExistsAsync_FileExists_ReturnsTrue.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Test content");
@@ -260,7 +261,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "UpdateAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 			var mockStreamInfo = new StreamInfo { Stream = new MemoryStream(), Length = 100 };
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
@@ -272,7 +273,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "UpdateAsync_SuccessfullyUpdatesFile_ReturnsSuccess.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Initial content");
@@ -301,7 +302,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "ExistsAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
 				provider.ExistsAsync(testFileId, cancellationTokenSource.Token));
@@ -312,7 +313,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "StoreAsync_InvalidInput_ReturnsError.txt";
 
 			var mockStreamInfo = new StreamInfo { Stream = null, Length = 0 }; 
 
@@ -329,7 +330,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
 				provider.GetAsync(testFileId, cancellationTokenSource.Token));
@@ -340,7 +341,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "ExistsAsync_FileDoesNotExist_ReturnsFalse.txt";
 
 			var result = await provider.ExistsAsync(testFileId, CancellationToken.None);
 
@@ -353,7 +354,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "DeleteAsync_FileExists_DeletesFileSuccessfully.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Test content");
@@ -369,7 +370,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "DeleteAsync_FileDoesNotExist_ReturnsError.txt";
 
 			var result = await provider.DeleteAsync(testFileId, CancellationToken.None);
 
@@ -385,7 +386,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "DeleteAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
 				provider.DeleteAsync(testFileId, cancellationTokenSource.Token));
@@ -397,7 +398,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetHashAsync_FileExists_ComputesHashSuccessfully.txt";
 			var testFilePath = Path.Combine(_fileSharePath, testFileId.ToString());
 
 			await File.WriteAllTextAsync(testFilePath, "Test content");
@@ -413,7 +414,7 @@ namespace FileShareLibrary.Tests
 		{
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid(); 
+			var testFileId = "GetHashAsync_FileDoesNotExist_ReturnsError.txt";
 
 			var result = await provider.GetHashAsync(testFileId, CancellationToken.None);
 
@@ -429,7 +430,7 @@ namespace FileShareLibrary.Tests
 
 			var mockLogger = new Mock<ILogger<FileShareContentProvider>>();
 			var provider = new FileShareContentProvider(_fileSharePath, mockLogger.Object);
-			var testFileId = Guid.NewGuid();
+			var testFileId = "GetHashAsync_WithCancellation_ThrowsOperationCanceledException.txt";
 
 			await Assert.ThrowsAsync<OperationCanceledException>(() =>
 				provider.GetHashAsync(testFileId, cancellationTokenSource.Token));

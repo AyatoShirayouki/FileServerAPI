@@ -547,11 +547,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
+      "projectUniqueName": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
       "projectName": "FileShareAPI",
-      "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
+      "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareAPI\\FileShareAPI.csproj",
       "packagesPath": "C:\\Users\\alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareAPI\\obj\\",
+      "outputPath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -572,8 +572,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
-              "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\OneBitProject\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj"
+            "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj": {
+              "projectPath": "C:\\Projects\\C#Projects\\TaskManager\\FileManager\\FileServerAPI\\FileShareLibrary\\FileShareLibrary.csproj"
             }
           }
         }
